@@ -1,0 +1,3 @@
+@echo off
+setlocal DisableDelayedExpansion
+powershell -STA -Command "Add-Type -AssemblyName System.Windows.Forms; Add-Type -AssemblyName System.Drawing; $f = New-Object Windows.Forms.Form; $f.Size = New-Object Drawing.Size(100,100); $f.BackColor = [Drawing.Color]::DodgerBlue; $f.FormBorderStyle = 'None'; $f.StartPosition = 'Manual'; $f.TopMost = $true; $p = New-Object Drawing.Drawing2D.GraphicsPath; $p.AddEllipse(0,0,100,100); $f.Region = New-Object Drawing.Region $p; $s = [Windows.Forms.Screen]::PrimaryScreen.WorkingArea; $x = Get-Random -Minimum $s.X -Maximum ($s.X + $s.Width - 100); $y = Get-Random -Minimum $s.Y -Maximum ($s.Y + $s.Height - 100); $f.Location = New-Object Drawing.Point($x, $y); $f.Add_Click({ $f.Close() }); [System.Windows.Forms.Application]::Run($f)"
